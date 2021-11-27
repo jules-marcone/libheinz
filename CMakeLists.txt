@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(PreventInSourceBuilds)
 
-project(libheinz VERSION 0.1 LANGUAGES CXX)
+project(LibHeinz VERSION 0.1 LANGUAGES CXX)
 
 ## Options.
 
@@ -32,12 +32,38 @@ endif()
 
 ## Install settings.
 
-set(destination ${CMAKE_INSTALL_PREFIX})
-#configure_file("libheinz.pc.in" "libheinz.pc" @ONLY)
-#install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libheinz.pc"
-#    DESTINATION "${destination}/lib/pkgconfig/")
-
 include(CTest)
 
 add_subdirectory(headers)
 add_subdirectory(test)
+
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${LibHeinz_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${LibHeinz_VERSION_MINOR}")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+include(CPack)
+
+
+include(CMakePackageConfigHelpers)
+export(PACKAGE LibHeinz)
+
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfig.cmake"
+  INSTALL_DESTINATION "lib/cmake/example"
+  NO_SET_AND_CHECK_MACRO
+  NO_CHECK_REQUIRED_COMPONENTS_MACRO
+  )
+
+
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfigVersion.cmake"
+  VERSION "${LibHeinz_VERSION_MAJOR}.${LibHeinz_VERSION_MINOR}"
+  COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES
+    ${PROJECT_BINARY_DIR}/LibHeinzConfig.cmake
+    ${PROJECT_BINARY_DIR}/LibHeinzConfigVersion.cmake
+    DESTINATION cmake COMPONENT dev)

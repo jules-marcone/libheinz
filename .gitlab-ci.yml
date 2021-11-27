@@ -43,3 +43,8 @@ native_Debian_clang:
     - make
     - ctest --output-on-failure
     - make install
+    - cpack --config CPackSourceConfig.cmake
+  artifacts:
+    paths:
+    - build/*gz
+    expire_in: 10 days
