@@ -1,10 +1,7 @@
-#include "Base/Vector/Transform3D.h"
-#include "Tests/GTestWrapper/google_test.h"
+#include "Vectors3D.h"
+#include "catch.hpp"
 
-class KVectorTest : public ::testing::Test {
-};
-
-TEST_F(KVectorTest, BasicMethods)
+TEST_CASE("KVector:BasicMethods", "")
 {
     R3 v;
     CHECK(v.x() == double(0));
@@ -26,15 +23,15 @@ TEST_F(KVectorTest, BasicMethods)
     CHECK(v2.z() == double(3.));
 
     R3 v3(1., 2., 3.);
-    EXPECT_DOUBLE_EQ(v3.mag2(), 1 * 1 + 2 * 2 + 3 * 3);
-    EXPECT_DOUBLE_EQ(v3.mag2(), v3.mag() * v3.mag());
-    EXPECT_DOUBLE_EQ(v3.magxy2(), 1 * 1 + 2 * 2);
-    EXPECT_DOUBLE_EQ(v3.magxy2(), v3.magxy() * v3.magxy());
-    EXPECT_DOUBLE_EQ(v3.magxy(), std::sqrt(1 * 1 + 2 * 2));
-    EXPECT_DOUBLE_EQ(v3.mag(), std::sqrt(1 * 1 + 2 * 2 + 3 * 3));
+    CHECK(v3.mag2() == 1 * 1 + 2 * 2 + 3 * 3);
+    CHECK(v3.mag2() == v3.mag() * v3.mag());
+    CHECK(v3.magxy2() == 1 * 1 + 2 * 2);
+    CHECK(v3.magxy2() == Approx(v3.magxy() * v3.magxy()).epsilon(1e-15));
+    CHECK(v3.magxy() == std::sqrt(1 * 1 + 2 * 2));
+    CHECK(v3.mag() == std::sqrt(1 * 1 + 2 * 2 + 3 * 3));
 }
 
-TEST_F(KVectorTest, BasicArithmetics)
+TEST_CASE("KVector:BasicArithmetics", "")
 {
     // assignment, self assignment, copy constructor
     R3 v1;
@@ -140,6 +137,6 @@ TEST_F(KVectorTest, BasicArithmetics)
     CHECK(a.x() * b.y() - a.y() * b.x() == c.z());
     // equality
     a = {1., 2., 3.};
-    EXPECT_TRUE(a == R3(1., 2., 3.));
-    EXPECT_TRUE(a != R3(1., 1., 3.));
+    CHECK(a == R3(1., 2., 3.));
+    CHECK(a != R3(1., 1., 3.));
 }

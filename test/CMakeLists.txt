@@ -1,4 +1,4 @@
-file(GLOB test_sources "Test*.cpp")
+file(GLOB test_sources "*Test.cpp")
 
 add_library(catch2 catch2.cpp)
 target_include_directories(catch2 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
