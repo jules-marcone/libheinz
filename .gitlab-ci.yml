@@ -43,7 +43,7 @@ native_Debian_clang:
     - make
     - ctest --output-on-failure
     - make install
-    - cpack --config CPackSourceConfig.cmake
+    - cpack --config CPackConfig.cmake -G TGZ
   artifacts:
     paths:
     - build/*gz
