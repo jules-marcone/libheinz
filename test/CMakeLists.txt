@@ -1,6 +1,10 @@
 file(GLOB test_sources "*Test.cpp")
 
 add_library(catch2 catch2.cpp)
+if (WIN32)
+    target_compile_options(catch2 /wd4625 /wd4626 /wd4820)
+endif()
+
 target_include_directories(catch2 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 foreach(source_file ${test_sources})
