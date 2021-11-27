@@ -1,5 +1,5 @@
-#include "Vectors3D.h"
-#include "Complex.h"
+#include <heinz/Vectors3D.h>
+#include <heinz/Complex.h>
 #include "catch.hpp"
 
 TEST_CASE("CVector:TrivialOperations", "")

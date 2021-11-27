@@ -2,7 +2,7 @@
 //
 //  libheinz:  C++ base library of Heinz Maier-Leibnitz Zentrum
 //
-//! @file      Vectors3D.h
+//! @file      heinz/Vectors3D.h
 //! @brief     Defines and implements three-dimensional vector types I3, R3, C3
 //!
 //! @homepage  https://jugit.fz-juelich.de/mlz/libheinz

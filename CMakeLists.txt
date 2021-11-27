@@ -34,7 +34,7 @@ endif()
 
 include(CTest)
 
-add_subdirectory(headers)
+add_subdirectory(inc)
 add_subdirectory(test)
 
 

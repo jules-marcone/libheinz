@@ -1,4 +1,4 @@
-#include "Vectors3D.h"
+#include <heinz/Vectors3D.h>
 #include "catch.hpp"
 
 TEST_CASE("KVector:BasicMethods", "")

@@ -2,7 +2,7 @@
 //
 //  libheinz:  C++ base library of Heinz Maier-Leibnitz Zentrum
 //
-//! @file      Complex.h
+//! @file      heinz/Complex.h
 //! @brief     Defines complex_t, and a few elementary functions
 //!
 //! @homepage  https://jugit.fz-juelich.de/mlz/libheinz

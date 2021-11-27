@@ -1,4 +1,4 @@
-set(api_files Complex.h Vectors3D.h)
+set(api_files heinz/Complex.h heinz/Vectors3D.h)
 
 install(
     FILES ${api_files}
