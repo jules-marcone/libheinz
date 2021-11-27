@@ -1,17 +1,13 @@
 file(GLOB test_sources "*Test.cpp")
 
-add_library(catch2 catch2.cpp)
 if (WIN32)
     add_compile_options(/wd4068 /wd4623 /wd4625 /wd4626 /wd4710 /wd4711 /wd4820 )
 endif()
 
-target_include_directories(catch2 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
 foreach(source_file ${test_sources})
     get_filename_component(base_name ${source_file} NAME_WE)
-    add_executable(${base_name} ${source_file})
+    add_executable(${base_name} ${source_file} catch2.cpp)
     target_include_directories(${base_name}
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/headers)
-    target_link_libraries(${base_name} PRIVATE catch2)
     add_test(NAME ${base_name} COMMAND ${base_name})
 endforeach(source_file)
