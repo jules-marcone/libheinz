@@ -26,7 +26,6 @@ windows:
     # debug-only: - dumpbin.exe /HEADERS lib\liblmfit.lib
     - ctest -C Release --output-on-failure
     - cmake --install .
-    - cpack .
 
 native_Debian_clang:
   tags: &native
