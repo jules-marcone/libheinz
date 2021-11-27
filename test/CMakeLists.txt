@@ -2,7 +2,7 @@ file(GLOB test_sources "*Test.cpp")
 
 add_library(catch2 catch2.cpp)
 if (WIN32)
-    target_compile_options(catch2 PRIVATE /wd4625 /wd4626 /wd4820)
+    add_compile_options(/wd4623 /wd4625 /wd4626 /wd4710 /wd4711 /wd4820 )
 endif()
 
 target_include_directories(catch2 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
