@@ -15,7 +15,6 @@
 #ifndef LIBHEINZ_VECTORS3D_H
 #define LIBHEINZ_VECTORS3D_H
 
-#include <array>
 #include <complex>
 
 template <class T> class Vec3;
@@ -27,38 +26,41 @@ using C3 = Vec3<std::complex<double>>;
 
 //! Three-dimensional vector template, for use with integer, double, or complex components.
 
-template <class T> class Vec3 : public std::array<T, 3> {
+template <class T> class Vec3 {
 private:
-    using super = std::array<T, 3>;
+    T m_x;
+    T m_y;
+    T m_z;
 
 public:
     // -------------------------------------------------------------------------
     // Constructors and other set functions
     // -------------------------------------------------------------------------
 
-    //! Constructs the null vector.
-    Vec3() : super{0., 0., 0.} {}
-
     //! Constructs a vector from cartesian components.
-    Vec3(const T x, const T y, const T z) : super{x, y, z} {}
+    Vec3(const T x_, const T y_, const T z_) : m_x(x_), m_y(y_), m_z(z_) {}
+
+    //! Constructs the null vector.
+    Vec3() : Vec3{0, 0, 0} {}
+
 
     // -------------------------------------------------------------------------
     // Component access
     // -------------------------------------------------------------------------
 
     //! Returns x-component in cartesian coordinate system.
-    inline T x() const { return (*this)[0]; }
+    inline T x() const { return m_x; }
     //! Returns y-component in cartesian coordinate system.
-    inline T y() const { return (*this)[1]; }
+    inline T y() const { return m_y; }
     //! Returns z-component in cartesian coordinate system.
-    inline T z() const { return (*this)[2]; }
+    inline T z() const { return m_z; }
 
     //! Sets x-component in cartesian coordinate system.
-    void setX(const T& a) { (*this)[0] = a; }
+    void setX(const T& a) { m_x = a; }
     //! Sets y-component in cartesian coordinate system.
-    void setY(const T& a) { (*this)[1] = a; }
+    void setY(const T& a) { m_y = a; }
     //! Sets z-component in cartesian coordinate system.
-    void setZ(const T& a) { (*this)[2] = a; }
+    void setZ(const T& a) { m_z = a; }
 
     // -------------------------------------------------------------------------
     // In-place operations
@@ -67,18 +69,18 @@ public:
     //! Adds other vector to this, and returns result.
     Vec3<T>& operator+=(const Vec3<T>& v)
     {
-        (*this)[0] += v[0];
-        (*this)[1] += v[1];
-        (*this)[2] += v[2];
+        m_x += v.x();
+        m_y += v.y();
+        m_z += v.z();
         return *this;
     }
 
     //! Subtracts other vector from this, and returns result.
     Vec3<T>& operator-=(const Vec3<T>& v)
     {
-        (*this)[0] -= v[0];
-        (*this)[1] -= v[1];
-        (*this)[2] -= v[2];
+        m_x -= v.x();
+        m_y -= v.y();
+        m_z -= v.z();
         return *this;
     }
 
@@ -86,9 +88,9 @@ public:
 #ifndef SWIG
     template <class U> auto operator*=(U a)
     {
-        (*this)[0] *= a;
-        (*this)[1] *= a;
-        (*this)[2] *= a;
+        m_x *= a;
+        m_y *= a;
+        m_z *= a;
         return *this;
     }
 #endif // USER_API
@@ -97,9 +99,9 @@ public:
 #ifndef SWIG
     template <class U> auto operator/=(U a)
     {
-        (*this)[0] /= a;
-        (*this)[1] /= a;
-        (*this)[2] /= a;
+        m_x /= a;
+        m_y /= a;
+        m_z /= a;
         return *this;
     }
 #endif // USER_API
@@ -147,6 +149,11 @@ public:
     // -------------------------------------------------------------------------
     // Functions of this and another vector
     // -------------------------------------------------------------------------
+
+    inline bool operator==(const Vec3<T>& other) const {
+        return x()==other.x() && y()==other.y() && z()==other.z(); }
+
+    inline bool operator!=(const Vec3<T>& other) const { return !(*this==other); }
 
     //! Returns dot product of vectors (antilinear in the first [=self] argument).
 #ifndef SWIG
