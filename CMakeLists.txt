@@ -37,31 +37,27 @@ include(CTest)
 add_subdirectory(inc)
 add_subdirectory(test)
 
-
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${LibHeinz_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${LibHeinz_VERSION_MINOR}")
 set(CPACK_SOURCE_GENERATOR "TGZ")
 include(CPack)
-
-
 include(CMakePackageConfigHelpers)
 export(PACKAGE LibHeinz)
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfig.cmake"
-  INSTALL_DESTINATION "lib/cmake/example"
-  NO_SET_AND_CHECK_MACRO
-  NO_CHECK_REQUIRED_COMPONENTS_MACRO
-  )
-
+    "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfig.cmake"
+    INSTALL_DESTINATION "lib/cmake/example"
+    NO_SET_AND_CHECK_MACRO
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO
+    )
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfigVersion.cmake"
-  VERSION "${LibHeinz_VERSION_MAJOR}.${LibHeinz_VERSION_MINOR}"
-  COMPATIBILITY AnyNewerVersion
-)
+    "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfigVersion.cmake"
+    VERSION "${LibHeinz_VERSION_MAJOR}.${LibHeinz_VERSION_MINOR}"
+    COMPATIBILITY AnyNewerVersion
+    )
 
 install(FILES
     ${PROJECT_BINARY_DIR}/LibHeinzConfig.cmake
