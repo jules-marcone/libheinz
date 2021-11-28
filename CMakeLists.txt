@@ -30,12 +30,14 @@ if(WERROR)
     add_compile_options(-Werror)
 endif()
 
-## Install settings.
+## Subdirectories.
 
 include(CTest)
 
 add_subdirectory(inc)
 add_subdirectory(test)
+
+## CPack settings.
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
@@ -45,6 +47,8 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 include(CPack)
 include(CMakePackageConfigHelpers)
 export(PACKAGE LibHeinz)
+
+## Config files.
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfig.cmake"
