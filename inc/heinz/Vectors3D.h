@@ -240,7 +240,7 @@ template <class T> inline Vec3<T> operator-(const Vec3<T>& a, const Vec3<T>& b)
 #ifndef SWIG
 template <class T, class U> inline auto operator*(const Vec3<T>& v, const U a)
 {
-    return Vec3<decltype(v.x() * v.x())>(v.x() * a, v.y() * a, v.z() * a);
+    return Vec3<decltype(v.x() * a)>{v.x() * a, v.y() * a, v.z() * a};
 }
 #endif // USER_API
 
@@ -249,7 +249,7 @@ template <class T, class U> inline auto operator*(const Vec3<T>& v, const U a)
 #ifndef SWIG
 template <class T, class U> inline auto operator*(const U a, const Vec3<T>& v)
 {
-    return Vec3<decltype(a * v.x())>(a * v.x(), a * v.y(), a * v.z());
+    return Vec3<decltype(a * v.x())>{a * v.x(), a * v.y(), a * v.z()};
 }
 #endif // USER_API
 
@@ -262,7 +262,7 @@ template <class T, class U> inline auto operator*(const U a, const Vec3<T>& v)
 //! @relates Vec3
 template <class T, class U> inline Vec3<T> operator/(const Vec3<T>& v, U a)
 {
-    return Vec3<T>(v.x() / a, v.y() / a, v.z() / a);
+    return {v.x() / a, v.y() / a, v.z() / a};
 }
 
 // =============================================================================
