@@ -24,7 +24,10 @@ using R3 = Vec3<double>;
 using C3 = Vec3<std::complex<double>>;
 
 
-//! Three-dimensional vector template, for use with integer, double, or complex components.
+//! Three-dimensional vector class, templated on base type.
+
+//! Base type T can be int, double, or complex<double>.
+//! The resulting classes shall be abbreviated I3, R3, C3.
 
 template <class T> class Vec3 {
 private:
