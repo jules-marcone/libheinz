@@ -191,6 +191,8 @@ public:
     Vec3<T> rotated(double a, const Vec3<T>& v) const;
 };
 
+#ifndef USER_API
+
 // =============================================================================
 // Non-member functions
 // =============================================================================
@@ -373,4 +375,5 @@ template <> inline double R3::angle(const R3& v) const
     return std::acos(cosa);
 }
 
+#endif // USER_API
 #endif // LIBHEINZ_VECTORS3D_H
