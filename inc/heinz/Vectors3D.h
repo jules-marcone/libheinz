@@ -294,7 +294,6 @@ template <class T> template <class U> inline auto Vec3<T>::cross(const Vec3<U>& 
 // Functions of this (with no further argument)
 // -----------------------------------------------------------------------------
 
-//! Returns complex conjugate vector
 template <> inline R3 R3::conj() const
 {
     return *this;
@@ -305,37 +304,31 @@ template <> inline C3 C3::conj() const
     return {std::conj(x()), std::conj(y()), std::conj(z())};
 }
 
-//! Returns azimuth angle.
 template <> inline double R3::phi() const
 {
     return x() == 0.0 && y() == 0.0 ? 0.0 : std::atan2(-y(), x());
 }
 
-//! Returns polar angle.
 template <> inline double R3::theta() const
 {
     return x() == 0.0 && y() == 0.0 && z() == 0.0 ? 0.0 : std::atan2(magxy(), z());
 }
 
-//! Returns cosine of polar angle.
 template <> inline double R3::cosTheta() const
 {
     return mag() == 0 ? 1 : z() / mag();
 }
 
-//! Returns squared sine of polar angle.
 template <> inline double R3::sin2Theta() const
 {
     return mag2() == 0 ? 0 : magxy2() / mag2();
 }
 
-//! Returns this, trivially converted to complex type.
 template <> inline C3 R3::complex() const
 {
     return {x(), y(), z()};
 }
 
-//! Returns real parts.
 template <> inline R3 R3::real() const
 {
     return *this;
@@ -346,7 +339,6 @@ template <> inline R3 C3::real() const
     return {x().real(), y().real(), z().real()};
 }
 
-//! Returns unit vector in direction of this. Throws for null vector.
 template <> inline R3 R3::unit() const
 {
     double len = mag();
@@ -367,7 +359,6 @@ template <> inline C3 C3::unit() const
 // Combine two vectors
 // -----------------------------------------------------------------------------
 
-//! Returns angle with respect to another vector.
 template <> inline double R3::angle(const R3& v) const
 {
     double cosa = 0;
