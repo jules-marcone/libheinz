@@ -87,8 +87,8 @@ public:
         return *this;
     }
 
-    //! Multiplies this with a scalar, and returns result.
 #ifndef SWIG
+    //! Multiplies this with a scalar, and returns result.
     template <class U> auto operator*=(U a)
     {
         m_x *= a;
@@ -96,10 +96,10 @@ public:
         m_z *= a;
         return *this;
     }
-#endif // USER_API
+#endif // SWIG
 
-    //! Divides this by a scalar, and returns result.
 #ifndef SWIG
+    //! Divides this by a scalar, and returns result.
     template <class U> auto operator/=(U a)
     {
         m_x /= a;
@@ -107,7 +107,7 @@ public:
         m_z /= a;
         return *this;
     }
-#endif // USER_API
+#endif // SWIG
 
     // -------------------------------------------------------------------------
     // Functions of this (with no further argument)
@@ -158,15 +158,15 @@ public:
 
     inline bool operator!=(const Vec3<T>& other) const { return !(*this==other); }
 
+#ifndef SWIG
     //! Returns dot product of vectors (antilinear in the first [=self] argument).
-#ifndef SWIG
     template <class U> auto dot(const Vec3<U>& v) const;
-#endif // USER_API
+#endif // SWIG
 
-    //! Returns cross product of vectors (linear in both arguments).
 #ifndef SWIG
+    //! Returns cross product of vectors (linear in both arguments).
     template <class U> auto cross(const Vec3<U>& v) const;
-#endif // USER_API
+#endif // SWIG
 
     //! Returns angle with respect to another vector.
     double angle(const Vec3<T>& v) const;
@@ -238,23 +238,23 @@ template <class T> inline Vec3<T> operator-(const Vec3<T>& a, const Vec3<T>& b)
     return {a.x() - b.x(), a.y() - b.y(), a.z() - b.z()};
 }
 
+#ifndef SWIG
 //! Multiplication vector by scalar.
 //! @relates Vec3
-#ifndef SWIG
 template <class T, class U> inline auto operator*(const Vec3<T>& v, const U a)
 {
     return Vec3<decltype(v.x() * a)>{v.x() * a, v.y() * a, v.z() * a};
 }
-#endif // USER_API
+#endif // SWIG
 
+#ifndef SWIG
 //! Multiplication scalar by vector.
 //! @relates Vec3
-#ifndef SWIG
 template <class T, class U> inline auto operator*(const U a, const Vec3<T>& v)
 {
     return Vec3<decltype(a * v.x())>{a * v.x(), a * v.y(), a * v.z()};
 }
-#endif // USER_API
+#endif // SWIG
 
 // vector*vector not supported
 //    (We do not provide the operator form a*b of the dot product:
@@ -272,23 +272,23 @@ template <class T, class U> inline Vec3<T> operator/(const Vec3<T>& v, U a)
 // ?? for API generation ??
 // =============================================================================
 
-//! Returns dot product of (complex) vectors (antilinear in the first [=self] argument).
 #ifndef SWIG
+//! Returns dot product of (complex) vectors (antilinear in the first [=self] argument).
 template <class T> template <class U> inline auto Vec3<T>::dot(const Vec3<U>& v) const
 {
     Vec3<T> left_star = this->conj();
     return left_star.x() * v.x() + left_star.y() * v.y() + left_star.z() * v.z();
 }
-#endif // USER_API
+#endif // SWIG
 
-//! Returns cross product of (complex) vectors.
 #ifndef SWIG
+//! Returns cross product of (complex) vectors.
 template <class T> template <class U> inline auto Vec3<T>::cross(const Vec3<U>& v) const
 {
     return Vec3<decltype(this->x() * v.x())>(y() * v.z() - v.y() * z(), z() * v.x() - v.z() * x(),
                                              x() * v.y() - v.x() * y());
 }
-#endif // USER_API
+#endif // SWIG
 
 // -----------------------------------------------------------------------------
 // Functions of this (with no further argument)
