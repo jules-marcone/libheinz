@@ -2,4 +2,4 @@
 
 @PACKAGE_INIT@
 
-set(LibHeinz_INCLUDE_DIR @CMAKE_INSTALL_PREFIX@/include)
+set(LibHeinz_INCLUDE_DIR "@CMAKE_INSTALL_PREFIX@/include")

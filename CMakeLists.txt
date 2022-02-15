@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(PreventInSourceBuilds)
 
-project(LibHeinz VERSION 0.1 LANGUAGES CXX)
+project(LibHeinz VERSION 0.1.2 LANGUAGES CXX)
 
 ## Options.
 
