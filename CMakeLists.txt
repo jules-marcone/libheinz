@@ -50,7 +50,7 @@ export(PACKAGE LibHeinz)
 
 ## Config files.
 
-configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfig.cmake"
     INSTALL_DESTINATION "lib/cmake/example"
     NO_SET_AND_CHECK_MACRO
@@ -64,6 +64,6 @@ write_basic_package_version_file(
     )
 
 install(FILES
-    ${PROJECT_BINARY_DIR}/LibHeinzConfig.cmake
-    ${PROJECT_BINARY_DIR}/LibHeinzConfigVersion.cmake
+    "${PROJECT_BINARY_DIR}/LibHeinzConfig.cmake"
+    "${PROJECT_BINARY_DIR}/LibHeinzConfigVersion.cmake"
     DESTINATION cmake COMPONENT dev)
