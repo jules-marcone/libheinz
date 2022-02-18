@@ -59,7 +59,7 @@ configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in"
 
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/LibHeinzConfigVersion.cmake"
-    VERSION "${LibHeinz_VERSION_MAJOR}.${LibHeinz_VERSION_MINOR}"
+    VERSION "${LibHeinz_VERSION}"
     COMPATIBILITY AnyNewerVersion
     )
 
