@@ -18,7 +18,6 @@
 #include <complex>
 
 template <class T> class Vec3;
-
 using I3 = Vec3<int>;
 using R3 = Vec3<double>;
 using C3 = Vec3<std::complex<double>>;
@@ -128,18 +127,6 @@ public:
     //! Returns distance from z axis.
     double magxy() const { return sqrt(magxy2()); }
 
-    //! Returns azimuth angle.
-    double phi() const;
-
-    //! Returns polar angle.
-    double theta() const;
-
-    //! Returns cosine of polar angle.
-    double cosTheta() const;
-
-    //! Returns squared sine of polar angle.
-    double sin2Theta() const;
-
     //! Returns unit vector in direction of this. Throws for null vector.
     Vec3<T> unit() const;
 
@@ -167,9 +154,6 @@ public:
     //! Returns cross product of vectors (linear in both arguments).
     template <class U> auto cross(const Vec3<U>& v) const;
 #endif // SWIG
-
-    //! Returns angle with respect to another vector.
-    double angle(const Vec3<T>& v) const;
 
     //! Returns projection of this onto other vector: (this*v)*v/|v|^2.
     Vec3<T> project(const Vec3<T>& v) const { return dot(v) * v / v.mag2(); }
@@ -306,29 +290,14 @@ template <> inline C3 C3::conj() const
     return {std::conj(x()), std::conj(y()), std::conj(z())};
 }
 
-template <> inline double R3::phi() const
-{
-    return x() == 0.0 && y() == 0.0 ? 0.0 : std::atan2(-y(), x());
-}
-
-template <> inline double R3::theta() const
-{
-    return x() == 0.0 && y() == 0.0 && z() == 0.0 ? 0.0 : std::atan2(magxy(), z());
-}
-
-template <> inline double R3::cosTheta() const
-{
-    return mag() == 0 ? 1 : z() / mag();
-}
-
-template <> inline double R3::sin2Theta() const
-{
-    return mag2() == 0 ? 0 : magxy2() / mag2();
-}
-
 template <> inline C3 R3::complex() const
 {
     return {x(), y(), z()};
+}
+
+template <> inline C3 C3::complex() const
+{
+    return *this;
 }
 
 template <> inline R3 R3::real() const
@@ -361,12 +330,35 @@ template <> inline C3 C3::unit() const
 // Combine two vectors
 // -----------------------------------------------------------------------------
 
-template <> inline double R3::angle(const R3& v) const
+namespace R3Util {
+
+//! Returns polar angle.
+inline double theta(const R3& a)
+{
+    return a.x() == 0.0 && a.y() == 0.0 && a.z() == 0.0 ? 0.0 : std::atan2(a.magxy(), a.z());
+}
+
+inline double phi(const R3& a)
+{
+    return a.x() == 0.0 && a.y() == 0.0 ? 0.0 : std::atan2(-a.y(), a.x());
+}
+
+inline double cosTheta(const R3& a)
+{
+    return a.mag() == 0 ? 1 : a.z() / a.mag();
+}
+
+inline double sin2Theta(const R3& a)
+{
+    return a.mag2() == 0 ? 0 : a.magxy2() / a.mag2();
+}
+
+inline double angle(const R3& a, const R3& b)
 {
     double cosa = 0;
-    double ptot = mag() * v.mag();
+    double ptot = a.mag() * b.mag();
     if (ptot > 0) {
-        cosa = dot(v) / ptot;
+        cosa = a.dot(b) / ptot;
         if (cosa > 1)
             cosa = 1;
         if (cosa < -1)
@@ -374,6 +366,8 @@ template <> inline double R3::angle(const R3& v) const
     }
     return std::acos(cosa);
 }
+
+} // namespace R3Util
 
 #endif // USER_API
 #endif // LIBHEINZ_VECTORS3D_H
