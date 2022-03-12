@@ -1,17 +1,23 @@
 stages:
   - build
 
-mac:
+mac10_15:
   tags:
-  - MacOS
+  - macbuild3
   stage: build
-  script:
+  script: &macbuild
     - mkdir build
     - cd build
     - cmake ..
     - make
     - ctest --output-on-failure
     - make install
+
+mac12_2:
+  tags:
+  - scgmac4
+  stage: build
+  script: *macbuild
 
 windows:
   tags:
