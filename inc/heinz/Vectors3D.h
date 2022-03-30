@@ -164,8 +164,11 @@ public:
 
     // //! Returns result of rotation around x-axis.
     // Vec3<T> rotatedX(double a) const;
-    // //! Returns result of rotation around y-axis.
-    // Vec3<T> rotatedY(double a) const;
+    //! Returns result of rotation around y-axis.
+    Vec3<T> rotatedY(double a) const
+    {
+        return Vec3<T>(cos(a) * x() + sin(a) * z(), y(), -sin(a) * x() + cos(a) * z());
+    }
     //! Returns result of rotation around z-axis.
     Vec3<T> rotatedZ(double a) const
     {
